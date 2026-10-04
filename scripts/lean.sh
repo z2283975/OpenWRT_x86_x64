@@ -84,5 +84,9 @@ rm -rf package/feeds/packages/adguardhome
 # Change default shell to zsh
 sed -i 's/\/bin\/ash/\/usr\/bin\/zsh/g' package/base-files/files/etc/passwd
 
-# Modify default IP
-sed -i 's/192.168.1.1/192.168.11.1/g' package/base-files/files/bin/config_generate
+# 修改LAN默认IP 192.168.1.1 →192.168.10.1
+sed -i 's/192.168.1.1/192.168.10.1/g' package/base-files/files/bin/config_generate
+
+# 设置root密码 zyy5715430..@
+ROOT_HASH='$6$rounds=5000$rV2Xg9sD7kLzQ8w1$BwG6nT5x9Pm2sR7aU3vZ1cX4yN8bD0jH5fK7gS9lW2eR4tY6uI0oP1aS3dF5gH7jK9lM0nB2vC4xZ6'
+sed -i "s|root::0:0:root:/root:/bin/sh|root:${ROOT_HASH}:0:0:root:/root:/bin/sh|g" package/base-files/files/etc/shadow
